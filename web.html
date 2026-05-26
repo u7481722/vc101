@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>優質汽車銷售網 | 尋找您的夢想車款</title>
+    <style>
+        /* 基礎設定與重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', "Microsoft JhengHei", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 導覽列設計 */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        /* 主視覺與搜尋區塊 (Hero Section) */
+        .hero {
+            /* 使用 Unsplash 免費圖庫作為背景 */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* 搜尋欄位 */
+        .search-bar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .search-bar select, .search-bar button {
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        .search-bar select {
+            width: 150px;
+        }
+        .search-bar button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 12px 30px;
+            transition: background-color 0.3s;
+        }
+        .search-bar button:hover {
+            background-color: #c0392b;
+        }
+
+        /* 精選車款區塊 */
+        .featured {
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .featured h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+        }
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        /* 車款卡片 */
+        .car-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        .car-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .car-details {
+            padding: 25px;
+        }
+        .car-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .car-price {
+            color: #e74c3c;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .car-specs div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .spec-label {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        .btn {
+            display: block;
+            text-align: center;
+            background: #1a1a1a;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background: #e74c3c;
+        }
+
+        /* 頁尾 */
+        footer {
+            background: #1a1a1a;
+            color: #bbb;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* 響應式設計 (RWD) */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 2.5rem; }
+            .search-bar select { width: 100%; }
+            .search-bar button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AutoMotors</div>
+        <nav>
+            <ul>
+                <li><a href="#">首頁</a></li>
+                <li><a href="#">尋找車款</a></li>
+                <li><a href="#">收購服務</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>尋找您的夢想車款</h1>
+        <p>提供超過 1,000 台嚴選優質中古車與新車</p>
+        
+        <div class="search-bar">
+            <select name="brand">
+                <option value="">選擇廠牌</option>
+                <option value="toyota">Toyota</option>
+                <option value="honda">Honda</option>
+                <option value="bmw">BMW</option>
+                <option value="mercedes">Mercedes-Benz</option>
+            </select>
+            
+            <select name="type">
+                <option value="">車輛型式</option>
+                <option value="sedan">轎車</option>
+                <option value="suv">休旅車 (SUV)</option>
+                <option value="hatchback">掀背車</option>
+            </select>
+            
+            <select name="price">
+                <option value="">預算範圍</option>
+                <option value="under50">50萬以下</option>
+                <option value="50-100">50萬 - 100萬</option>
+                <option value="over100">100萬以上</option>
+            </select>
+            
+            <button type="button">搜尋車輛</button>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2>本月精選車款</h2>
+        <div class="car-grid">
+            
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Chevrolet">
+                <div class="car-details">
+                    <div class="car-title">2023 Chevrolet Corvette</div>
+                    <div class="car-price">NT$ 4,580,000</div>
+                    <div class="car-specs">
+                        <div><span class="spec-label">年份</span>2023</div>
+                        <div><span class="spec-label">里程</span>5,000 km</div>
+                        <div><span class="spec-label">燃油</span>汽油</div>
+                        <div><span class="spec-label">變速箱</span>自排</div>
+                    </div>
+                    <a href="#" class="btn">查看詳情</a>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Mercedes">
+                <div class="car-details">
+                    <div class="car-title">2022 Mercedes-Benz C300</div>
+                    <div class="car-price">NT$ 2,350,000</div>
+                    <div class="car-specs">
+                        <div><span class="spec-label">年份</span>2022</div>
+                        <div><span class="spec-label">里程</span>12,000 km</div>
+                        <div><span class="spec-label">燃油</span>油電混合</div>
+                        <div><span class="spec-label">變速箱</span>自排</div>
+                    </div>
+                    <a href="#" class="btn">查看詳情</a>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1503376760367-17ea3ce8a3b8?auto=format&fit=crop&w=600&q=80" alt="BMW">
+                <div class="car-details">
+                    <div class="car-title">2021 BMW M4 Competition</div>
+                    <div class="car-price">NT$ 3,850,000</div>
+                    <div class="car-specs">
+                        <div><span class="spec-label">年份</span>2021</div>
+                        <div><span class="spec-label">里程</span>24,500 km</div>
+                        <div><span class="spec-label">燃油</span>汽油</div>
+                        <div><span class="spec-label">變速箱</span>自排</div>
+                    </div>
+                    <a href="#" class="btn">查看詳情</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AutoMotors 優質汽車銷售網. All rights reserved.</p>
+        <p>台北市大安區車業路 100 號 | 電話: (02) 2345-6789</p>
+    </footer>
+
+</body>
+</html>
